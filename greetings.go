@@ -1,9 +1,22 @@
 package greetings
 
-import "fmt"
-
-func Hello(name string) string{
+import (
+	"errors"
+	"fmt"
+	"math/rand"
+)
+func Hello(name string) (string, error) {
+	if (name==""){
+		return "",errors.New("Name is blank!")
+	}
 	//return a message with name
-	message := fmt.Sprintf("Hello, %v. Welcome to go modules!", name);
-	return message
+	message := fmt.Sprintf(randomFormat(), name);
+	return message,nil
+}
+
+func randomFormat() string{
+	formats :=[] string{
+		"Hi, %v. Welcome!","Hello, %v. How was your day?","%v is this you?"}
+	
+		return formats[rand.Intn((len(formats)))]
 }
